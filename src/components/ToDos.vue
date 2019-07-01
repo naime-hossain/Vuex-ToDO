@@ -11,7 +11,8 @@
               :class="{'active':index==0,'bg-success':todo.completed}"
             >
               {{todo.title}}
-              <span class="badge badge-danger badge-pill">Task Number: {{ todo.id }}</span>
+              <span class="badge badge-info badge-pill">Task Number: {{ todo.id }}</span>
+              <button @click="removeTodo(todo.id)" class="btn btn-danger">Delete</button>
             </li>
           </ul>
         </div>
@@ -27,7 +28,10 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["fetchTodos"])
+    ...mapActions(["fetchTodos", "deleteTodo"]),
+    removeTodo(id) {
+      this.deleteTodo(id);
+    }
   },
   computed: mapGetters(["allTodos"]),
   created() {
